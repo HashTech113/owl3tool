@@ -20,13 +20,13 @@ const tools = [
       </svg>
     ),
     color: "#10b981",
-    glow: "rgba(16, 185, 129, 0.5)",
+    glow: "rgba(16, 185, 129, 0.4)",
   },
   {
     id: "idea" as Tool,
     name: "Idea Probe",
-    tagline: "Validate your idea",
-    description: "AI powered idea validation",
+    tagline: "Startup Analytics",
+    description: "AI-powered idea analysis",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="11" cy="11" r="8" />
@@ -35,22 +35,22 @@ const tools = [
       </svg>
     ),
     color: "#8b5cf6",
-    glow: "rgba(139, 92, 246, 0.5)",
+    glow: "rgba(139, 92, 246, 0.4)",
   },
   {
     id: "stratix" as Tool,
-    name: "CompetiX",
-    tagline: "Competitor study",
+    name: "Stratix",
+    tagline: "Strategy Engine",
     description: "Competitive intelligence",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
-        <line x1="12" y1="22" x2="12" y2="15.5" />
-        <polyline points="22 8.5 12 15.5 2 8.5" />
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+        <line x1="12" y1="22.08" x2="12" y2="12" />
       </svg>
     ),
     color: "#f59e0b",
-    glow: "rgba(245, 158, 11, 0.5)",
+    glow: "rgba(245, 158, 11, 0.4)",
   },
 ];
 
@@ -72,36 +72,21 @@ export default function DashboardPage() {
         className="fixed inset-0 opacity-10"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px)
+            linear-gradient(rgba(59, 130, 246, 0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59, 130, 246, 0.06) 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px',
+          backgroundSize: '60px 60px',
         }}
       />
 
       {/* Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-transparent">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
-              </svg>
-            </div>
-            <span className="text-white font-bold text-xl tracking-wider">OWLYTICS</span>
+        <div className="max-w-7xl mx-auto">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 via-purple-600 to-blue-600 flex items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+              <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
+            </svg>
           </div>
-
-          <div className="hidden md:flex items-center gap-8">
-            {['Services', 'About', 'Connect'].map((link) => (
-              <button key={link} className="text-white/80 hover:text-white text-sm font-medium transition-colors">
-                {link}
-              </button>
-            ))}
-          </div>
-
-          <button className="px-6 py-2.5 rounded-full text-white text-sm font-semibold bg-blue-600/30 border border-blue-500/40 backdrop-blur-sm hover:bg-blue-500/40 transition-all">
-            SIGN UP
-          </button>
         </div>
       </nav>
 
@@ -116,135 +101,151 @@ export default function DashboardPage() {
           onMouseEnter={() => setHoveredTool("stratix")}
           onMouseLeave={() => setHoveredTool(null)}
           onClick={() => handleToolClick("stratix")}
-          className="hidden md:block absolute top-[18%] cursor-pointer"
+          className="hidden md:block absolute top-[15%] cursor-pointer"
         >
           <ToolCard tool={tools[2]} isHovered={hoveredTool === "stratix"} />
         </motion.div>
 
-        {/* Central Glowing Sphere */}
-        <div className="relative">
-          {/* Outer glow - breathing animation */}
+        {/* Central Glowing Sphere - Matching Image */}
+        <div className="relative flex items-center justify-center">
+          {/* Outermost glow - ambient bloom */}
           <motion.div
             animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.3, 0.5, 0.3],
+              scale: [1, 1.15, 1],
+              opacity: [0.4, 0.6, 0.4],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute h-[500px] w-[500px] rounded-full"
+            style={{
+              background: 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(99, 102, 241, 0.15) 40%, transparent 70%)',
+              filter: 'blur(40px)',
+            }}
+          />
+
+          {/* Secondary glow layer */}
+          <motion.div
+            animate={{
+              scale: [1.05, 1.2, 1.05],
+              opacity: [0.5, 0.7, 0.5],
             }}
             transition={{
               duration: 4,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
+              delay: 0.5,
             }}
-            className="absolute inset-[-80px] rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-cyan-500/30 blur-3xl"
+            className="absolute h-[400px] w-[400px] rounded-full"
+            style={{
+              background: 'radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(59, 130, 246, 0.2) 50%, transparent 70%)',
+              filter: 'blur(30px)',
+            }}
           />
 
-          {/* Middle glow ring */}
+          {/* Inner glow ring */}
           <motion.div
             animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.4, 0.6, 0.4],
+              scale: [0.98, 1.08, 0.98],
+              opacity: [0.6, 0.85, 0.6],
             }}
             transition={{
-              duration: 3,
+              duration: 3.5,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 0.5
+              delay: 1,
             }}
-            className="absolute inset-[-40px] rounded-full bg-gradient-to-br from-cyan-500/40 via-blue-500/30 to-purple-500/40 blur-2xl"
+            className="absolute h-[320px] w-[320px] rounded-full"
+            style={{
+              background: 'radial-gradient(circle, rgba(147, 51, 234, 0.5) 0%, rgba(59, 130, 246, 0.35) 45%, transparent 65%)',
+              filter: 'blur(20px)',
+            }}
           />
 
-          {/* Inner glow */}
+          {/* Core sphere */}
           <motion.div
             animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.6, 0.8, 0.6],
+              scale: [0.98, 1.02, 0.98],
+              y: [0, -4, 0],
             }}
             transition={{
-              duration: 2.5,
+              duration: 4,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 1
             }}
-            className="absolute inset-[-20px] rounded-full bg-gradient-to-br from-blue-600/50 via-purple-600/40 to-cyan-500/50 blur-xl"
-          />
-
-          {/* Central Sphere */}
-          <motion.div
-            animate={{
-              scale: [1, 1.05, 1],
-              boxShadow: [
-                '0 0 100px rgba(59, 130, 246, 0.8), 0 0 200px rgba(139, 92, 246, 0.4)',
-                '0 0 150px rgba(59, 130, 246, 1), 0 0 300px rgba(139, 92, 246, 0.6)',
-                '0 0 100px rgba(59, 130, 246, 0.8), 0 0 200px rgba(139, 92, 246, 0.4)',
-              ]
+            className="relative h-48 w-48 md:h-64 md:w-64 rounded-full"
+            style={{
+              background: 'linear-gradient(135deg, #7c3aed 0%, #6366f1 25%, #4f46e5 50%, #2563eb 75%, #06b6d4 100%)',
+              boxShadow: `
+                0 0 60px rgba(139, 92, 246, 0.6),
+                0 0 100px rgba(99, 102, 241, 0.4),
+                0 0 150px rgba(59, 130, 246, 0.3),
+                inset 0 0 60px rgba(255, 255, 255, 0.1)
+              `,
             }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="relative w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500"
           >
             {/* Inner highlight */}
-            <div className="absolute inset-4 md:inset-6 rounded-full bg-gradient-to-br from-white/30 to-transparent" />
+            <div
+              className="absolute inset-4 md:inset-8 rounded-full"
+              style={{
+                background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 60%)',
+              }}
+            />
+          </motion.div>
 
-            {/* Orbiting particles */}
-            {[0, 60, 120, 180, 240, 300].map((rotation, i) => (
+          {/* Floating particles around sphere */}
+          {[...Array(12)].map((_, i) => {
+            const angle = (i / 12) * 360;
+            const radius = 180 + Math.random() * 60;
+            const x = Math.cos((angle * Math.PI) / 180) * radius;
+            const y = Math.sin((angle * Math.PI) / 180) * radius;
+            return (
               <motion.div
                 key={i}
-                animate={{ rotate: 360 }}
-                transition={{
-                  duration: 10 + i * 2,
-                  repeat: Infinity,
-                  ease: "linear"
+                className="absolute w-1.5 h-1.5 rounded-full bg-white"
+                style={{
+                  transform: `translate(${x}px, ${y}px)`,
+                  boxShadow: '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4)',
                 }}
-                className="absolute inset-0"
-                style={{ transformOrigin: 'center' }}
-              >
-                <motion.div
-                  animate={{
-                    opacity: [0.3, 1, 0.3],
-                    scale: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 2 + i * 0.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.3
-                  }}
-                  className="absolute w-2 h-2 md:w-3 md:h-3 rounded-full bg-white shadow-lg shadow-white/50"
-                  style={{
-                    top: '50%',
-                    left: '50%',
-                    transform: `rotate(${rotation}deg) translateX(${80 + i * 10}px)`,
-                  }}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+                animate={{
+                  opacity: [0.3, 1, 0.3],
+                  scale: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 2 + Math.random() * 2,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                  ease: "easeInOut",
+                }}
+              />
+            );
+          })}
         </div>
 
         {/* Left - MRR Card */}
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
+          initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
           onMouseEnter={() => setHoveredTool("mrr")}
           onMouseLeave={() => setHoveredTool(null)}
           onClick={() => handleToolClick("mrr")}
-          className="hidden md:block absolute left-[15%] top-1/2 -translate-y-1/2 cursor-pointer"
+          className="hidden md:block absolute left-[12%] top-1/2 -translate-y-1/2 cursor-pointer"
         >
           <ToolCard tool={tools[0]} isHovered={hoveredTool === "mrr"} />
         </motion.div>
 
         {/* Right - Idea Probe Card */}
         <motion.div
-          initial={{ opacity: 0, x: 40 }}
+          initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
           onMouseEnter={() => setHoveredTool("idea")}
           onMouseLeave={() => setHoveredTool(null)}
           onClick={() => handleToolClick("idea")}
-          className="hidden md:block absolute right-[15%] top-1/2 -translate-y-1/2 cursor-pointer"
+          className="hidden md:block absolute right-[12%] top-1/2 -translate-y-1/2 cursor-pointer"
         >
           <ToolCard tool={tools[1]} isHovered={hoveredTool === "idea"} />
         </motion.div>
@@ -254,19 +255,19 @@ export default function DashboardPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="absolute bottom-[15%] text-center max-w-2xl mx-auto px-6"
+          className="absolute bottom-[12%] text-center max-w-2xl mx-auto px-6"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
             Your AI assistant for smarter productivity.
           </h1>
-          <p className="text-base md:text-lg text-gray-300 mb-8 max-w-xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-gray-400 mb-8 max-w-xl mx-auto leading-relaxed">
             Harness the power of AI to automate tasks, streamline workflows, and boost your team's efficiency — all in one simple platform.
           </p>
           <div className="flex items-center justify-center gap-4 flex-wrap">
-            <button className="px-8 py-3.5 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-500/30 transition-all">
+            <button className="px-8 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 shadow-lg shadow-violet-500/30 transition-all">
               Get started
             </button>
-            <button className="px-8 py-3.5 rounded-xl font-semibold text-white border border-white/30 hover:bg-white/10 transition-all flex items-center gap-2">
+            <button className="px-8 py-3.5 rounded-xl font-semibold text-white border border-white/20 hover:bg-white/10 transition-all flex items-center gap-2">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10" />
                 <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" />
@@ -280,7 +281,7 @@ export default function DashboardPage() {
   );
 }
 
-// Tool Card Component
+// Tool Card Component - Matching Image Style
 function ToolCard({
   tool,
   isHovered,
@@ -290,37 +291,41 @@ function ToolCard({
 }) {
   return (
     <motion.div
-      animate={{ scale: isHovered ? 1.08 : 1 }}
-      whileHover={{ y: -8 }}
+      animate={{ scale: isHovered ? 1.05 : 1, y: isHovered ? -8 : 0 }}
+      whileHover={{ scale: 1.05, y: -8 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={cn("relative group w-72")}
+      className="relative group"
     >
-      {/* Card glow */}
+      {/* Glow effect behind card */}
       <motion.div
-        className="absolute -inset-2 rounded-2xl opacity-0 blur-xl transition-opacity duration-500"
-        style={{ background: tool.glow }}
-        animate={{ opacity: isHovered ? 0.8 : 0 }}
+        className="absolute -inset-1 rounded-2xl blur-xl transition-opacity duration-500"
+        style={{
+          background: tool.glow,
+          opacity: isHovered ? 0.8 : 0,
+        }}
       />
 
       {/* Main card */}
       <div
         className={cn(
-          "relative rounded-2xl p-5 backdrop-blur-xl transition-all duration-300",
-          isHovered ? "bg-slate-900/95" : "bg-slate-900/60 border border-slate-700/40"
+          "relative rounded-2xl p-5 backdrop-blur-xl transition-all duration-300 border",
+          isHovered
+            ? "bg-slate-900/90 border-slate-700/60"
+            : "bg-slate-900/60 border-slate-800/40"
         )}
         style={{
           boxShadow: isHovered
-            ? `0 0 50px ${tool.glow}, inset 0 0 30px rgba(255,255,255,0.03)`
-            : 'inset 0 0 30px rgba(255,255,255,0.02)',
+            ? `0 0 40px ${tool.glow}, inset 0 0 20px rgba(255,255,255,0.03)`
+            : 'inset 0 0 20px rgba(255,255,255,0.02)',
         }}
       >
-        {/* Icon */}
+        {/* Icon container */}
         <div
-          className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-300"
+          className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300"
           style={{
-            background: `linear-gradient(135deg, ${tool.color}30, ${tool.color}10)`,
-            border: `2px solid ${isHovered ? tool.color : 'transparent'}`,
-            boxShadow: isHovered ? `0 0 30px ${tool.glow}` : 'none',
+            background: `${tool.color}15`,
+            border: `1.5px solid ${isHovered ? tool.color : 'transparent'}`,
+            boxShadow: isHovered ? `0 0 20px ${tool.glow}` : 'none',
           }}
         >
           <div style={{ color: tool.color }}>{tool.icon}</div>
@@ -328,20 +333,23 @@ function ToolCard({
 
         {/* Content */}
         <div className="text-left">
-          <div className="text-xs font-semibold mb-1 tracking-widest uppercase" style={{ color: tool.color }}>
+          <div
+            className="text-xs font-semibold mb-2 tracking-widest uppercase"
+            style={{ color: tool.color }}
+          >
             {tool.tagline}
           </div>
           <h3 className="text-xl font-bold text-white mb-1">{tool.name}</h3>
-          <p className="text-sm text-gray-400 leading-relaxed">{tool.description}</p>
+          <p className="text-sm text-gray-500 leading-relaxed">{tool.description}</p>
         </div>
 
-        {/* Arrow */}
+        {/* Arrow indicator */}
         <motion.div
           className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100"
-          animate={{ x: isHovered ? [0, 8, 0] : 0 }}
-          transition={{ duration: 1, repeat: Infinity }}
+          animate={{ x: isHovered ? [0, 6, 0] : 0 }}
+          transition={{ duration: 1.2, repeat: Infinity }}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={tool.color} strokeWidth="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={tool.color} strokeWidth="2">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </motion.div>

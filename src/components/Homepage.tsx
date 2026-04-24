@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
+
 import { Button } from "@/components/ui/button";
 
-type ToolId = "mrr" | "idea" | "competix";
+type ToolId = "mrr" | "idea" | "strategy";
 
 const tools = [
   {
@@ -10,6 +12,7 @@ const tools = [
     description: "Model MRR, ARR, churn & forecasts",
     color: "from-emerald-400/30 to-emerald-500/10",
     accent: "#34d399",
+    icon: "chart",
   },
   {
     id: "idea" as ToolId,
@@ -18,22 +21,51 @@ const tools = [
     description: "AI powered idea validation",
     color: "from-sky-400/30 to-cyan-500/10",
     accent: "#38bdf8",
+    icon: "search",
   },
   {
-    id: "competix" as ToolId,
-    name: "CompetiX",
-    tagline: "Competitor study",
+    id: "strategy" as ToolId,
+    name: "Strategy Engine",
+    tagline: "Strategic planning",
     description: "Competitive intelligence",
     color: "from-amber-400/30 to-orange-500/10",
     accent: "#f59e0b",
+    icon: "cube",
   },
 ];
 
 const toolLinks: Record<ToolId, string> = {
   mrr: "https://mrr.iamhashir.com/",
   idea: "https://idea.iamhashir.com/",
-  competix: "https://competition.iamhashir.com/",
+  strategy: "https://competition.iamhashir.com/",
 };
+
+const sphereParticles = [
+  {
+    size: "h-3 w-3",
+    glow: "0 0 24px rgba(255,255,255,0.9)",
+    x: [78, 92, 84],
+    y: [-138, -154, -144],
+    duration: 4.6,
+    delay: 0.2,
+  },
+  {
+    size: "h-4 w-4",
+    glow: "0 0 28px rgba(255,255,255,0.82)",
+    x: [112, 126, 118],
+    y: [-84, -100, -88],
+    duration: 5.1,
+    delay: 0.8,
+  },
+  {
+    size: "h-3.5 w-3.5",
+    glow: "0 0 22px rgba(255,255,255,0.75)",
+    x: [152, 164, 156],
+    y: [10, -6, 4],
+    duration: 4.9,
+    delay: 1.2,
+  },
+];
 
 const Homepage = () => {
   const handleToolClick = (toolId: ToolId) => {
@@ -76,16 +108,16 @@ const Homepage = () => {
         </nav>
 
         <main className="mx-auto flex max-w-7xl flex-col items-center px-6 pb-20 pt-8">
-          <div className="mb-10 flex w-full max-w-5xl flex-col items-center gap-8">
+          <div className="mb-10 flex w-full max-w-6xl flex-col items-center gap-10">
             <button
               type="button"
-              onClick={() => handleToolClick("competix")}
+              onClick={() => handleToolClick("strategy")}
               className="hidden md:block"
             >
               <ToolCard tool={tools[2]} />
             </button>
 
-            <div className="flex w-full items-center justify-center gap-8">
+            <div className="flex w-full items-center justify-center gap-10 xl:gap-16">
               <button
                 type="button"
                 onClick={() => handleToolClick("mrr")}
@@ -94,12 +126,88 @@ const Homepage = () => {
                 <ToolCard tool={tools[0]} />
               </button>
 
-              <div className="relative flex h-56 w-56 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-cyan-500 to-violet-500 shadow-[0_0_70px_rgba(59,130,246,0.45)]">
-                <div className="absolute inset-[-2rem] rounded-full bg-cyan-400/15 blur-3xl" />
-                <div className="absolute inset-5 rounded-full bg-white/15" />
-                <div className="relative z-10 text-center">
-                  <div className="text-xs uppercase tracking-[0.4em] text-white/70">Owlytics</div>
-                  <div className="mt-3 text-2xl font-semibold">Research Hub</div>
+              <div className="relative flex h-[300px] w-[300px] items-center justify-center md:h-[360px] md:w-[360px]">
+                <motion.div
+                  animate={{
+                    scale: [0.98, 1.03, 0.99],
+                    opacity: [0.34, 0.56, 0.38],
+                  }}
+                  transition={{
+                    duration: 5.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(92,121,255,0.32)_0%,rgba(98,114,255,0.18)_34%,rgba(14,23,52,0)_72%)] blur-2xl"
+                />
+
+                <motion.div
+                  animate={{
+                    scale: [0.98, 1.05, 1],
+                    opacity: [0.24, 0.38, 0.26],
+                  }}
+                  transition={{
+                    duration: 5.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.4,
+                  }}
+                  className="absolute h-[345px] w-[345px] rounded-full bg-[radial-gradient(circle,rgba(88,112,255,0.1)_8%,rgba(129,140,248,0.18)_30%,rgba(56,189,248,0.28)_58%,rgba(59,130,246,0)_75%)] blur-3xl"
+                />
+
+                <motion.div
+                  animate={{
+                    scale: [0.995, 1.025, 1],
+                    y: [0, -3, 0],
+                    boxShadow: [
+                      "0 0 0 1px rgba(255,255,255,0.08), 0 0 40px rgba(147,51,234,0.28), 0 0 100px rgba(59,130,246,0.4)",
+                      "0 0 0 1px rgba(255,255,255,0.14), 0 0 56px rgba(168,85,247,0.36), 0 0 135px rgba(59,130,246,0.52)",
+                      "0 0 0 1px rgba(255,255,255,0.08), 0 0 40px rgba(147,51,234,0.28), 0 0 100px rgba(59,130,246,0.4)",
+                    ],
+                  }}
+                  transition={{
+                    duration: 6.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="relative h-[230px] w-[230px] rounded-full md:h-[260px] md:w-[260px]"
+                >
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 24,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="absolute inset-0 overflow-hidden rounded-full bg-[linear-gradient(132deg,#4f5cf8_0%,#8b5cf6_30%,#c026d3_58%,#38bdf8_100%)]"
+                  >
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_32%_28%,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.06)_22%,rgba(255,255,255,0)_46%)]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(140deg,rgba(255,255,255,0.12)_8%,rgba(255,255,255,0)_30%,rgba(255,255,255,0)_55%,rgba(56,189,248,0.2)_100%)]" />
+                    <div className="absolute inset-[10%] rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.24)_0%,rgba(192,132,252,0.62)_38%,rgba(56,189,248,0.38)_100%)] opacity-80" />
+                    <div className="absolute inset-[10%] rounded-full bg-[radial-gradient(circle_at_36%_24%,rgba(255,255,255,0.14)_0%,rgba(255,255,255,0)_42%)]" />
+                    <div className="absolute inset-0 rounded-full border border-white/12" />
+                  </motion.div>
+                </motion.div>
+
+                <div className="pointer-events-none absolute inset-0">
+                  {sphereParticles.map((particle, index) => (
+                    <motion.div
+                      key={index}
+                      className={`absolute left-1/2 top-1/2 rounded-full bg-white ${particle.size}`}
+                      style={{ boxShadow: particle.glow }}
+                      animate={{
+                        x: particle.x,
+                        y: particle.y,
+                        opacity: [0.35, 1, 0.42],
+                        scale: [0.78, 1.16, 0.82],
+                      }}
+                      transition={{
+                        duration: particle.duration,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: particle.delay,
+                      }}
+                    />
+                  ))}
                 </div>
               </div>
 
